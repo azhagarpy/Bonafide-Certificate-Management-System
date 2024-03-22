@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}BONAFIDE{% endblock %}
+{% block body %}
+<a href="/" class="back"><i class="fa-solid fa-arrow-left"></i></a>
+<div class="loginForm">
+  <div class="gg">
+
+
+<div class="glass"></div>
+  <form method="post">
+    {% csrf_token %}
+    <p>
+    <label class="form-label">UserName </label>
+    {{ form.username }}
+    </p>
+    <p>
+      <label>Password </label>
+      {{ form.password }}
+    </p>
+    {{form.errors}}
+    <button type="submit" class="btn btn-success loginbtn">Login</button>
+    <a href="{% url 'stdRegister' %}">? new student Register</a>
+  </form>
+</div>
+  </div>
+    {% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block title %}BONAFIDE{% endblock %}
+{% block body %}
+
+<div class="bonafide_requests">
+    <h1 class="py-3 mb-3">BONAFIDE REQUESTS</h1>
+    <div class="row my-2">
+        <p class="col-4"><span class="text-primary">Name : </span>{{staff}}</p>
+        <p class="col-4"><span class="text-primary">Department : </span>{{staff.dep}}</p>
+    <a href="{% url 'logoutUser' %}" class="btn btn-info">Logout</a>
+    </div>
+    <div class="p-2">
+        <h1 class="ttl my-4">Request from {{staff.dep}} Students</h1>
+    <table class="table">
+        <thead>
+            <th>Name</th>
+            <th>RollNumber</th>
+            <th>reason</th>
+            <th>Accept</th>
+            <th>Reject</th>
+        </thead>
+        <tbody>
+            {% for i in applications %}
+            {% if not i.status %}
+            {% if not i.rejected %}
+            <tr>
+                <td>{{i.student.user.username}}</td>
+                <td>{{i.student.rollNumber}}</td>
+                <td>{{i.reason}}</td>
+                <td><a href="{% url 'acceptBonafideRequest' i.id  %}" class="btn btn-success">✔</a></td>
+                <td  id="cancel" class="btn btn-danger"  >X</td>
+                <div class="model">
+                    <form method="post" action="{% url 'rejectBonafideRequest' i.id  %}">
+                        {% csrf_token %}
+                    <span id="closeModel">X</span>
+                    <label>Reson for Rejection</label>
+                    <br>
+                    <textarea cols="70" rows="4" name="rreson"></textarea>
+                    <button class="btn btn-danger my-3">submit</button>
+                </form>
+                </div>
+            </tr>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+
+{% endblock %}

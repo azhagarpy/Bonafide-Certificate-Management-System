@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block title %}BONAFIDE{% endblock %}
+{% block body %}
+<div class="home">
+    <h1 class="display-4">Welcome to THRC</h1>
+<div class="login">
+    <div class="login-card  col-4 row">
+        <img src="../static/images/std.png" alt="">
+    <a href="{% url 'stdLogin' %}" class="btn btn-primary">LOGIN US STUDENT</a>
+    </div>
+    <div class="login-card  col-4 row">
+        <img src="../static/images/staff1.png" alt="">
+        <a href="{% url 'staffLogin' %}" class="btn btn-success">LOGIN US STAFF</a>
+    </div>
+    
+</div>
+</div>
+{% endblock %}

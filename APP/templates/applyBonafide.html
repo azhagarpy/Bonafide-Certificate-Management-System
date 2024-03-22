@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block title %}BONAFIDE{% endblock %}
+{% block body %}
+<div class="apply_bonafide">
+    <h1>APPLY BONAFIDE</h1>
+    <div>
+        <h1><span class="text-primary">Name : </span>{{user.username}}</h1>
+        <h1><span class="text-primary">RollNumber : </span>{{student.rollNumber}}</h1>
+        <a href="{% url 'logoutUser' %}" class="btn btn-danger">Logout</a>
+    </div>
+    {% if showForm %}
+    <form action="{% url 'applyBonaifde' %}" method="post">
+        {% csrf_token %}
+        <textarea name="reason" id="reason" cols="80" rows="7" placeholder="type the reason" class="form-control" ></textarea>
+        <br>
+        <button class="btn btn-success">Submit</button>
+    </form>
+    {% else %}
+        {% if application.status %}
+            <p class="btn btn-success">request accepted</p>
+            <a href="{{application.certificateFile.url}}" class="btn btn-info">Download</a>
+        {% elif application.rejected %}
+            <p class="btn btn-danger">Application Rejected</p>
+            <p class="bg-white p-5 rounded">{{application.rejectReson}}</p>
+        {% else %}
+        <p class="btn btn-info">! already applied</p>
+    {% endif %}
+    {% endif %}
+</div>
+    {% endblock %}
